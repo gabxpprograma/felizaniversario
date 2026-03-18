@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Feliz Aniversário</title>
+
+<style>
+
+/* Reset */
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+/* Fundo branco */
+body{
+background:#ffffff;
+font-family:"Times New Roman",Times,serif;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+color:#0b2a5b;
+}
+
+/* Título */
+header{
+font-size:2.5rem;
+font-weight:800;
+margin-bottom:40px;
+}
+
+/* Área das portas */
+.doors{
+display:flex;
+gap:90px; /* MAIS separação */
+flex-wrap:wrap;
+justify-content:center;
+margin-top:20px;
+padding:20px;
+}
+
+/* Porta */
+.door{
+width:140px;
+height:240px;
+background:#022841; /* azul escuro */
+border:4px solid #001728;
+border-radius:6px;
+position:relative;
+cursor:pointer;
+transition:transform .6s ease;
+transform-origin:left;
+}
+
+/* maçaneta */
+.door::after{
+content:"";
+position:absolute;
+right:12px;
+top:50%;
+width:10px;
+height:10px;
+background:#f5ca3f;
+border-radius:50%;
+}
+
+/* abrir porta */
+.door.open{
+transform:rotateY(-100deg);
+}
+
+/* painel */
+.panel{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:#f5f5f5;
+border:2px solid #0b2a5b;
+border-radius:10px;
+padding:25px;
+width:320px;
+text-align:center;
+transition:.4s;
+}
+
+.panel.show{
+transform:translate(-50%,-50%) scale(1);
+}
+
+button{
+margin-top:15px;
+padding:6px 14px;
+border:none;
+background:#0b2a5b;
+color:#fff;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#123d80;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>Feliz Aniversário, meu amor!</header>
+<h3> Atrás de cada porta tem uma pequena mensagem pra você.</h3>
+
+<div class="doors">
+
+<div class="door" data-index="0"></div>
+<div class="door" data-index="1"></div>
+<div class="door" data-index="2"></div>
+<div class="door" data-index="3"></div>
+
+</div>
+
+<div class="panel" id="panel">
+<p id="texto"></p>
+<button onclick="fechar()">Fechar</button>
+</div>
+
+<script>
+
+const textos=[
+
+"Feliz aniversário, meu amor!! Que nunca falte saúde, paz, felicidade e motivos pra sorrir. Que Deus abençoe sua vida hoje e sempre, realizando seus sonhos e iluminando seu caminho todos os dias.",
+
+"Saiba que eu amo cada detalhe seu, seus olhos castanho claro, seu cabelo macio, seu cheiro, seu abraço, sua boca, seu sorriso, seu carinho…",
+
+"Você não faz ideia do quanto que eu amo ficar ao seu lado",
+
+"Eu te amo muito, lindo!"
+
+];
+
+const doors=document.querySelectorAll(".door");
+const panel=document.getElementById("panel");
+const texto=document.getElementById("texto");
+
+doors.forEach((door,i)=>{
+door.addEventListener("click",()=>{
+door.classList.add("open");
+texto.textContent=textos[i];
+panel.classList.add("show");
+});
+});
+
+function fechar(){
+panel.classList.remove("show");
+doors.forEach(d=>d.classList.remove("open"));
+}
+
+</script>
+
+</body>
+</html>
